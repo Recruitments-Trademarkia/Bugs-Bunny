@@ -1,6 +1,7 @@
 package migrations
 
 import (
+	"Bugs-Bunny/pkg/models"
 	"Bugs-Bunny/src/db"
 )
 
@@ -14,4 +15,5 @@ func Migrate() {
 
 	database := db.GetDB()
 	database.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
+	database.AutoMigrate(&models.User{}, &models.ApiKey{})
 }

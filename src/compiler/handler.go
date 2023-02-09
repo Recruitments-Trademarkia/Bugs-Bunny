@@ -5,15 +5,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"log"
+	"os"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/mount"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/gofiber/websocket/v2"
-	"io"
-	"log"
-	"os"
 )
 
 func (l *Language) Handler(c *websocket.Conn) {
@@ -66,7 +67,7 @@ func (l *Language) Handler(c *websocket.Conn) {
 		return
 	}
 
-	timeoutContext, cancel := context.WithTimeout(context.Background(), 0)
+	timeoutContext, _ := context.WithTimeout(context.Background(), 0)
 
 	var resp container.ContainerCreateCreatedBody
 	resp, err = dockerClient.ContainerCreate(timeoutContext, &container.Config{

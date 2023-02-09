@@ -2,14 +2,38 @@ package middleware
 
 import (
 	"Bugs-Bunny/src/db"
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	uuid2 "github.com/google/uuid"
-	"log"
 )
 
 // UserAuthMiddleware is a middleware that checks if the user is authenticated
 func UserAuthMiddleware(c *fiber.Ctx) error {
 	// TODO: Implement User Auth Middleware
+	// Get the session token from the request headers
+	/*sessionToken := c.Get("Authorization")
+
+	// If the session token is not found, return an Unauthorized response
+	if sessionToken == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized. Missing authorization header.",
+		})
+	}
+
+	// Call the GetUserBySessionToken method to retrieve the user from the database
+	user, err := db.UserService.GetUserBySessionToken(sessionToken)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized. Invalid authorization header.",
+		})
+	}
+
+	// If the user is found, set the user in the context for later use
+	c.Locals("user", user)
+
+	// Continue to the next middleware in the chain
+	*/
 	return c.Next()
 
 }

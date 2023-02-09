@@ -3,6 +3,7 @@ package router
 import (
 	"Bugs-Bunny/src/controller"
 	"Bugs-Bunny/src/middleware"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -12,7 +13,7 @@ func MountUserSideRoutes(app fiber.Router) {
 	{
 		thisController := controller.UserController{}
 		userGroup.Get("/fetch", thisController.GetUserByEmail)
-		// TODO: Replace API key controller.UserController.ReplaceApiKey
+		userGroup.Put("/replace-api-key", thisController.ReplaceApiKey)
 	}
 
 }

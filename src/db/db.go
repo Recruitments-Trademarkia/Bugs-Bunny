@@ -5,12 +5,13 @@ import (
 	"Bugs-Bunny/src/utils"
 	"database/sql"
 	"fmt"
+	"log"
+	"time"
+
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
-	"time"
 )
 
 var db *gorm.DB

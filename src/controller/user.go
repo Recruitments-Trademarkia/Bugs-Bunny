@@ -3,6 +3,7 @@ package controller
 import (
 	"Bugs-Bunny/src/db"
 	"Bugs-Bunny/src/schemas"
+
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
