@@ -21,13 +21,11 @@ func NewPostgresRepo(db *gorm.DB) Repository {
 func (r *repo) GetUserByEmail(email string) (*models.User, error) {
 	// TODO: Implement GetUserByEmail
 	var user models.User
-	result := r.DB.Where("email = ?", email).First(&user)
-	if result.Error != nil {
-		return nil, result.Error
+	err := r.DB.Where("email = ?", email).First(&user).Error
+	if err != nil {
+		return nil, err
 	}
-	if result.RowsAffected == 0 {
-		return nil, nil
-	}
+
 	return &user, nil
 
 	//return nil, nil

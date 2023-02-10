@@ -67,8 +67,8 @@ func (l *Language) Handler(c *websocket.Conn) {
 		return
 	}
 
-	timeoutContext, _ := context.WithTimeout(context.Background(), 0)
-
+	timeoutContext, cancel := context.WithTimeout(context.Background(), 0)
+	defer cancel()
 	var resp container.ContainerCreateCreatedBody
 	resp, err = dockerClient.ContainerCreate(timeoutContext, &container.Config{
 		AttachStdin:  true,
