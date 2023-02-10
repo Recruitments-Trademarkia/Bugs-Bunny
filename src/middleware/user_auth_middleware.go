@@ -20,9 +20,9 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 			"message": "Unauthorized. Missing authorization header.",
 		})
 	}
-
-	/* Call the GetUserBySessionToken method to retrieve the user from the database
-	user, err := db.UserService.GetUserBySessionToken(sessionToken)
+	uuid, err := uuid2.Parse(sessionToken)
+	// Call the GetUserBySessionToken method to retrieve the user from the database
+	user, err := db.ApiService.GetApiKeyByUserId(&uuid)
 	if err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Unauthorized. Invalid authorization header.",
@@ -30,7 +30,7 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 	}
 
 	// If the user is found, set the user in the context for later use
-	c.Locals("user", user)*/
+	c.Locals("user", user)
 
 	// Continue to the next middleware in the chain
 
