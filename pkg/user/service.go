@@ -1,6 +1,8 @@
 package user
 
 import "Bugs-Bunny/pkg/models"
+import	"github.com/google/uuid"
+
 
 type Service interface {
 	GetUserByEmail(email string) (*models.User, error)
