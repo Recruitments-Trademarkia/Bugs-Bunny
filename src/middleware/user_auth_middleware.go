@@ -30,6 +30,13 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 	}
 
 	// If the user is found, set the user in the context for later use
+	if user == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized",
+		})
+	}
+
+	// Store the user's information in the context for future use
 	c.Locals("user", user)
 
 	// Continue to the next middleware in the chain
