@@ -13,6 +13,7 @@ func MountUserSideRoutes(app fiber.Router) {
 	{
 		thisController := controller.UserController{}
 		userGroup.Get("/fetch", thisController.GetUserByEmail)
+		// TODO: Replace API key controller.UserController.ReplaceApiKey
 		userGroup.Put("/replace-api-key", thisController.ReplaceApiKey)
 	}
 
