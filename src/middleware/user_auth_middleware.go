@@ -12,7 +12,7 @@ import (
 func UserAuthMiddleware(c *fiber.Ctx) error {
 	// TODO: Implement User Auth Middleware
 	// Get the session token from the request headers
-	/*sessionToken := c.Get("Authorization")
+	sessionToken := c.Get("Authorization")
 
 	// If the session token is not found, return an Unauthorized response
 	if sessionToken == "" {
@@ -21,7 +21,7 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 		})
 	}
 
-	// Call the GetUserBySessionToken method to retrieve the user from the database
+	/* Call the GetUserBySessionToken method to retrieve the user from the database
 	user, err := db.UserService.GetUserBySessionToken(sessionToken)
 	if err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -30,10 +30,10 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 	}
 
 	// If the user is found, set the user in the context for later use
-	c.Locals("user", user)
+	c.Locals("user", user)*/
 
 	// Continue to the next middleware in the chain
-	*/
+
 	return c.Next()
 
 }

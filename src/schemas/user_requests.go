@@ -1,13 +1,16 @@
 package schemas
 
-import "github.com/go-playground/validator/v10"
+import (
+	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
+)
 
 type GetUserByEmail struct {
 	Email string `json:"email" validate:"required,email"`
 }
 type ReplaceApiKey struct {
-	Email  string `json:"email" validate:"required,email"`
-	ApiKey string `json:"api_key" validate:"required"`
+	//Email  string `json:"email" validate:"required,email"`
+	ApiKey *uuid.UUID `json:"api_key" validate:"required"`
 }
 
 func (g *GetUserByEmail) Validate() []*ErrorView {
