@@ -7,7 +7,7 @@ import (
 )
 
 func GetLanguage(name string) *Language {
-	return nil
+	//return nil
 	l := &Language{
 		Name:     name,
 		Filename: "main",
