@@ -15,5 +15,6 @@ func Migrate() {
 
 	database := db.GetDB()
 	database.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
+
 	database.AutoMigrate(&models.User{}, &models.ApiKey{})
 }
