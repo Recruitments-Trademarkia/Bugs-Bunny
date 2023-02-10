@@ -3,6 +3,7 @@ package middleware
 import (
 	"Bugs-Bunny/src/db"
 	"log"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	uuid2 "github.com/google/uuid"
@@ -10,7 +11,7 @@ import (
 
 // UserAuthMiddleware is a middleware that checks if the user is authenticated
 func UserAuthMiddleware(c *fiber.Ctx) error {
-	// TODO: Implement User Auth Middleware
+	/*TODO: Implement User Auth Middleware
 	// Get the session token from the request headers
 	sessionToken := c.Get("Authorization")
 
@@ -21,6 +22,47 @@ func UserAuthMiddleware(c *fiber.Ctx) error {
 		})
 	}
 	uuid, err := uuid2.Parse(sessionToken)
+	// Call the GetUserBySessionToken method to retrieve the user from the database
+	user, err := db.ApiService.GetApiKeyByUserId(&uuid)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized. Invalid authorization header.",
+		})
+	}
+
+	// If the user is found, set the user in the context for later use
+	if user == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized",
+		})
+	}
+
+	// Store the user's information in the context for future use
+	c.Locals("user", user)
+
+	// Continue to the next middleware in the chain
+
+	return c.Next()*/
+	// TODO: Implement User Auth Middleware
+	// Get the session token from the request headers
+	sessionToken := c.Get("Authorization")
+
+	// If the session token is not found, return an Unauthorized response
+	if sessionToken == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized. Missing authorization header.",
+		})
+	}
+
+	// Split the session token string to retrieve the JWT token
+	token := strings.Split(sessionToken, " ")[1]
+	uuid, err := uuid2.Parse(token)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized. Invalid authorization header.",
+		})
+	}
+
 	// Call the GetUserBySessionToken method to retrieve the user from the database
 	user, err := db.ApiService.GetApiKeyByUserId(&uuid)
 	if err != nil {

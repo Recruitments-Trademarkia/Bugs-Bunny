@@ -5,6 +5,7 @@ import (
 	"Bugs-Bunny/src/schemas"
 
 	"github.com/gofiber/fiber/v2"
+	uuid2 "github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -55,7 +56,9 @@ func (u *UserController) ReplaceApiKey(c *fiber.Ctx) error {
 			"errors":  err,
 		})
 	}
-	user, err := db.UserService.ReplaceApiKey(req.ApiKey)
+	token := req.ApiKey
+	uuid, err := uuid2.Parse(token)
+	user, err := db.UserService.ReplaceApiKey(&uuid)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
