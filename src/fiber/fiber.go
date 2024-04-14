@@ -17,7 +17,7 @@ func Start() {
 		fiber.Config{
 			Concurrency: 0,
 			GETOnly:     true,
-			AppName:     "Trademarkia - Bugs Bunny - \nSRM Kattankulathur\nCode: Neela Kattappa\n",
+			AppName:     "Trademarkia - Bugs Bunny",
 		},
 	)
 
